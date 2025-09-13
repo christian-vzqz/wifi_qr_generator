@@ -1,178 +1,178 @@
-# 📱 Generador de QR WiFi
+# 📱 WiFi QR Generator
 
-Una aplicación web moderna y simple para generar códigos QR que permiten conectarse automáticamente a redes WiFi.
+A modern and simple web application for generating QR codes that allow automatic connection to WiFi networks.
 
-## ✨ Características
+## ✨ Features
 
-- 🔒 **Completamente privado**: Todo el procesamiento se realiza localmente en tu navegador
-- 📱 **Responsive**: Funciona perfectamente en cualquier dispositivo
-- 🎨 **UI moderna**: Interfaz elegante con Tailwind CSS
-- ⚡ **Rápido**: Generación instantánea de códigos QR
-- 📥 **Descarga fácil**: Guarda el código QR como imagen PNG
-- 📋 **Copia al portapapeles**: Copia la imagen directamente
-- 🔧 **Flexible**: Soporta diferentes tipos de seguridad WiFi
+- 🔒 **Completely private**: All processing is done locally in your browser
+- 📱 **Responsive**: Works perfectly on any device
+- 🎨 **Modern UI**: Elegant interface with Tailwind CSS
+- ⚡ **Fast**: Instant QR code generation
+- 📥 **Easy download**: Save QR code as PNG image
+- 📋 **Copy to clipboard**: Copy image directly
+- 🔧 **Flexible**: Supports different WiFi security types
 
-## 🚀 Tecnologías utilizadas
+## 🚀 Technologies used
 
-- **Vite**: Build tool rápido y moderno
-- **React 19**: Framework de UI
-- **Tailwind CSS**: Framework de CSS utilitario
-- **qrcode**: Librería para generar códigos QR
-- **Lucide React**: Iconos modernos
+- **Vite**: Fast and modern build tool
+- **React 19**: UI framework
+- **Tailwind CSS**: Utility-first CSS framework
+- **qrcode**: Library for generating QR codes
+- **Lucide React**: Modern icons
 
-## 📦 Instalación y uso
+## 📦 Installation and usage
 
-### Prerrequisitos
-- Node.js (versión 18 o superior)
+### Prerequisites
+- Node.js (version 18 or higher)
 - pnpm
 
-### Pasos de instalación
+### Installation steps
 
-1. **Clona el repositorio**
+1. **Clone the repository**
    ```bash
-   git clone [url-del-repo]
+   git clone [repo-url]
    cd wifi_qr_generator
    ```
 
-2. **Instala las dependencias**
+2. **Install dependencies**
    ```bash
    pnpm install
    ```
 
-3. **Ejecuta el servidor de desarrollo**
+3. **Run the development server**
    ```bash
    pnpm run dev
    ```
 
-4. **Abre tu navegador**
-   - Visita `http://localhost:5173`
+4. **Open your browser**
+   - Visit `http://localhost:5173`
 
-### Scripts disponibles
+### Available scripts
 
-- `pnpm run dev` - Inicia el servidor de desarrollo
-- `pnpm run build` - Construye la aplicación para producción
-- `pnpm run preview` - Previsualiza la build de producción
+- `pnpm run dev` - Start development server
+- `pnpm run build` - Build application for production
+- `pnpm run preview` - Preview production build
 
-## 🖥️ Cómo usar la aplicación
+## 🖥️ How to use the application
 
-1. **Ingresa los datos de tu WiFi**:
-   - Nombre de la red (SSID)
-   - Contraseña (si aplica)
-   - Tipo de seguridad (WPA/WPA2, WEP, o sin contraseña)
-   - Marca si es una red oculta (opcional)
+1. **Enter your WiFi data**:
+   - Network name (SSID)
+   - Password (if applicable)
+   - Security type (WPA/WPA2, WEP, or no password)
+   - Mark if it's a hidden network (optional)
 
-2. **Genera el código QR**:
-   - Haz clic en "Generar Código QR"
-   - El código se genera instantáneamente
+2. **Generate the QR code**:
+   - Click "Generate QR Code"
+   - The code is generated instantly
 
-3. **Descarga o comparte**:
-   - Personaliza el nombre del archivo
-   - Descarga como imagen PNG
-   - O cópialo al portapapeles
+3. **Download or share**:
+   - Customize the file name
+   - Download as PNG image
+   - Or copy to clipboard
 
-4. **Usa el código QR**:
-   - Escanea con cualquier dispositivo móvil
-   - La conexión WiFi se realizará automáticamente
+4. **Use the QR code**:
+   - Scan with any mobile device
+   - WiFi connection will be made automatically
 
-## 🔧 Personalización
+## 🔧 Customization
 
-### Colores y tema
-Los colores se pueden modificar en `tailwind.config.js`:
+### Colors and theme
+Colors can be modified in `tailwind.config.js`:
 
 ```javascript
 theme: {
   extend: {
     colors: {
-      // Agrega tus colores personalizados aquí
+      // Add your custom colors here
     }
   }
 }
 ```
 
-### Configuración del QR
-Modifica las opciones del QR en `src/utils/qrUtils.js`:
+### QR configuration
+Modify QR options in `src/utils/qrUtils.js`:
 
 ```javascript
 const qrCodeDataURL = await QRCode.toDataURL(wifiString, {
   errorCorrectionLevel: 'M', // L, M, Q, H
-  width: 256,                // Tamaño en píxeles
-  margin: 1,                 // Margen alrededor del QR
+  width: 256,                // Size in pixels
+  margin: 1,                 // Margin around QR
   color: {
-    dark: '#000000',         // Color del QR
-    light: '#FFFFFF'         // Color de fondo
+    dark: '#000000',         // QR color
+    light: '#FFFFFF'         // Background color
   }
 });
 ```
 
-## 🏗️ Estructura del proyecto
+## 🏗️ Project structure
 
 ```
 wifi_qr_generator/
 ├── src/
 │   ├── components/
-│   │   ├── QRGenerator.jsx    # Componente principal
-│   │   ├── WiFiForm.jsx       # Formulario para datos WiFi
-│   │   └── QRDisplay.jsx      # Mostrar y descargar QR
+│   │   ├── QRGenerator.jsx    # Main component
+│   │   ├── WiFiForm.jsx       # Form for WiFi data
+│   │   └── QRDisplay.jsx      # Display and download QR
 │   ├── utils/
-│   │   └── qrUtils.js         # Utilidades para generar QR
-│   ├── App.jsx                # Componente raíz
-│   ├── main.jsx               # Punto de entrada
-│   └── index.css              # Estilos base (Tailwind)
-├── index.html                 # HTML base
-├── package.json               # Dependencias y scripts
-├── tailwind.config.js         # Configuración de Tailwind
-└── vite.config.js             # Configuración de Vite
+│   │   └── qrUtils.js         # QR generation utilities
+│   ├── App.jsx                # Root component
+│   ├── main.jsx               # Entry point
+│   └── index.css              # Base styles (Tailwind)
+├── index.html                 # Base HTML
+├── package.json               # Dependencies and scripts
+├── tailwind.config.js         # Tailwind configuration
+└── vite.config.js             # Vite configuration
 ```
 
-## 🔒 Privacidad y seguridad
+## 🔒 Privacy and security
 
-- ✅ **Sin servidor**: Todo funciona localmente
-- ✅ **Sin recopilación de datos**: No se guardan ni envían datos
-- ✅ **Sin analytics**: No hay seguimiento de usuarios
-- ✅ **Código abierto**: Puedes revisar todo el código
+- ✅ **No server**: Everything works locally
+- ✅ **No data collection**: No data is saved or sent
+- ✅ **No analytics**: No user tracking
+- ✅ **Open source**: You can review all the code
 
 ## 🌍 Deployment
 
-### Netlify, Vercel, o GitHub Pages
+### Netlify, Vercel, or GitHub Pages
 
-1. **Build de producción**:
+1. **Production build**:
    ```bash
    pnpm run build
    ```
 
-2. **Sube la carpeta `dist/`** a tu servicio de hosting preferido
+2. **Upload the `dist/` folder** to your preferred hosting service
 
-### Usando Netlify CLI
+### Using Netlify CLI
 
 ```bash
 pnpm run build
 npx netlify deploy --prod --dir=dist
 ```
 
-## 🤝 Contribuciones
+## 🤝 Contributions
 
-¡Las contribuciones son bienvenidas! Si encuentras algún error o tienes ideas para mejorar la aplicación:
+Contributions are welcome! If you find any bugs or have ideas to improve the application:
 
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+This project is under the MIT License. See the `LICENSE` file for more details.
 
 ## ❓ FAQ
 
-**¿Es seguro ingresar mi contraseña WiFi?**
-Sí, completamente. Toda la generación del QR ocurre en tu navegador y nada se envía a servidores externos.
+**Is it safe to enter my WiFi password?**
+Yes, completely. All QR generation happens in your browser and nothing is sent to external servers.
 
-**¿Qué dispositivos pueden escanear estos códigos QR?**
-Cualquier smartphone moderno con iOS o Android puede escanear y conectarse automáticamente.
+**What devices can scan these QR codes?**
+Any modern smartphone with iOS or Android can scan and connect automatically.
 
-**¿Puedo usar esto en mi empresa?**
-Sí, al ser completamente local y sin dependencias externas, es perfecto para uso empresarial.
+**Can I use this in my company?**
+Yes, being completely local and without external dependencies, it's perfect for business use.
 
-**¿Funciona sin internet?**
-Una vez cargada la página, la aplicación funciona completamente offline.
+**Does it work without internet?**
+Once the page is loaded, the application works completely offline.
