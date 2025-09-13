@@ -121,6 +121,7 @@ describe("qrUtils", () => {
         download: "",
         click: vi.fn(),
       };
+
       global.document.createElement.mockReturnValue(mockElement);
 
       const dataUrl = "data:image/png;base64,test";
