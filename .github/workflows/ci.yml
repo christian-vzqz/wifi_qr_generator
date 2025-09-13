@@ -47,17 +47,11 @@ jobs:
       - name: Check Prettier formatting
         run: pnpm run format:check
 
+      - name: Run tests
+        run: pnpm run test:run
+
       - name: Build project
         run: pnpm run build
-
-      - name: Run tests (if available)
-        run: |
-          if [ -f "package.json" ] && grep -q '"test"' package.json; then
-            pnpm run test
-          else
-            echo "No tests found, skipping test step"
-          fi
-        continue-on-error: true
 
   security-checks:
     name: Security Checks
