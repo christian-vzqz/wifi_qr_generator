@@ -12,6 +12,8 @@
     "format:check": "prettier --check .",
     "check": "pnpm lint && pnpm format:check",
     "fix": "pnpm lint:fix && pnpm format",
+    "ci": "pnpm check && pnpm build",
+    "validate": "pnpm install --frozen-lockfile && pnpm ci",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,0 +1,8 @@
+# Global code owners
+* @christian-vzqz
+
+# Specific paths
+/.github/ @christian-vzqz
+/package.json @christian-vzqz
+/pnpm-lock.yaml @christian-vzqz
+/src/ @christian-vzqz
