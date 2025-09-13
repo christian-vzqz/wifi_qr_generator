@@ -1,5 +1,5 @@
 import QRGenerator from "./components/QRGenerator";
-import { LanguageProvider } from "./contexts/LanguageContext";
+import { LanguageProvider } from "./contexts/LanguageContext.jsx";
 
 function App() {
   return (

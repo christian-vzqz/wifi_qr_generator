@@ -24,23 +24,27 @@ A modern and simple web application for generating QR codes that allow automatic
 ## 📦 Installation and usage
 
 ### Prerequisites
+
 - Node.js (version 18 or higher)
 - pnpm
 
 ### Installation steps
 
 1. **Clone the repository**
+
    ```bash
    git clone [repo-url]
    cd wifi_qr_generator
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Run the development server**
+
    ```bash
    pnpm run dev
    ```
@@ -82,6 +86,7 @@ A modern and simple web application for generating QR codes that allow automatic
 ## 🔧 Customization
 
 ### Colors and theme
+
 Colors can be modified in `tailwind.config.js`:
 
 ```javascript
@@ -95,17 +100,18 @@ theme: {
 ```
 
 ### QR configuration
+
 Modify QR options in `src/utils/qrUtils.js`:
 
 ```javascript
 const qrCodeDataURL = await QRCode.toDataURL(wifiString, {
-  errorCorrectionLevel: 'M', // L, M, Q, H
-  width: 256,                // Size in pixels
-  margin: 1,                 // Margin around QR
+  errorCorrectionLevel: "M", // L, M, Q, H
+  width: 256, // Size in pixels
+  margin: 1, // Margin around QR
   color: {
-    dark: '#000000',         // QR color
-    light: '#FFFFFF'         // Background color
-  }
+    dark: "#000000", // QR color
+    light: "#FFFFFF", // Background color
+  },
 });
 ```
 
@@ -166,6 +172,7 @@ To add a new language:
 ### Netlify, Vercel, or GitHub Pages
 
 1. **Production build**:
+
    ```bash
    pnpm run build
    ```
