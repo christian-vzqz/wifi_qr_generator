@@ -1,12 +1,12 @@
 import QRCode from "qrcode";
 
 /**
- * Genera una cadena de texto en formato WiFi QR
- * @param {string} ssid - Nombre de la red WiFi
- * @param {string} password - Contraseña de la red WiFi
- * @param {string} security - Tipo de seguridad (WPA, WEP, nopass)
- * @param {boolean} hidden - Si la red está oculta
- * @returns {string} Cadena de texto formateada para QR WiFi
+ * Generates a WiFi QR format text string
+ * @param {string} ssid - WiFi network name
+ * @param {string} password - WiFi network password
+ * @param {string} security - Security type (WPA, WEP, nopass)
+ * @param {boolean} hidden - Whether the network is hidden
+ * @returns {string} WiFi QR formatted text string
  */
 export const generateWiFiString = (
   ssid,
@@ -14,7 +14,6 @@ export const generateWiFiString = (
   security = "WPA",
   hidden = false
 ) => {
-  // Escapar caracteres especiales en SSID y password
   const escapedSSID = ssid.replace(/([";,\\:])/g, "\\$1");
   const escapedPassword = password.replace(/([";,\\:])/g, "\\$1");
 
@@ -24,12 +23,12 @@ export const generateWiFiString = (
 };
 
 /**
- * Genera un código QR a partir de datos WiFi
- * @param {string} ssid - Nombre de la red WiFi
- * @param {string} password - Contraseña de la red WiFi
- * @param {string} security - Tipo de seguridad
- * @param {boolean} hidden - Si la red está oculta
- * @returns {Promise<string>} Data URL del código QR generado
+ * Generates a QR code from WiFi data
+ * @param {string} ssid - WiFi network name
+ * @param {string} password - WiFi network password
+ * @param {string} security - Security type
+ * @param {boolean} hidden - Whether the network is hidden
+ * @returns {Promise<string>} QR code data URL
  */
 export const generateQRCode = async (
   ssid,
@@ -54,15 +53,15 @@ export const generateQRCode = async (
 
     return qrCodeDataURL;
   } catch (error) {
-    console.error("Error generando código QR:", error);
-    throw new Error("No se pudo generar el código QR");
+    console.error("Error generating QR code:", error);
+    throw new Error("Could not generate QR code");
   }
 };
 
 /**
- * Descarga un código QR como archivo PNG
- * @param {string} dataURL - Data URL del código QR
- * @param {string} filename - Nombre del archivo (sin extensión)
+ * Downloads a QR code as PNG file
+ * @param {string} dataURL - QR code data URL
+ * @param {string} filename - File name (without extension)
  */
 export const downloadQRCode = (dataURL, filename = "wifi-qr") => {
   try {
@@ -73,34 +72,34 @@ export const downloadQRCode = (dataURL, filename = "wifi-qr") => {
     link.click();
     document.body.removeChild(link);
   } catch (error) {
-    console.error("Error descargando archivo:", error);
-    throw new Error("No se pudo descargar el archivo");
+    console.error("Error downloading file:", error);
+    throw new Error("Could not download file");
   }
 };
 
 /**
- * Valida los datos de entrada para WiFi
- * @param {string} ssid - Nombre de la red WiFi
- * @param {string} password - Contraseña de la red WiFi
- * @returns {Object} Objeto con validación y mensajes de error
+ * Validates WiFi input data
+ * @param {string} ssid - WiFi network name
+ * @param {string} password - WiFi network password
+ * @returns {Object} Object with validation and error messages
  */
 export const validateWiFiData = (ssid, password) => {
   const errors = [];
 
   if (!ssid || ssid.trim().length === 0) {
-    errors.push("El nombre de la red (SSID) es obligatorio");
+    errors.push("Network name (SSID) is required");
   }
 
   if (ssid && ssid.length > 32) {
-    errors.push("El nombre de la red no puede exceder 32 caracteres");
+    errors.push("Network name cannot exceed 32 characters");
   }
 
   if (!password || password.trim().length === 0) {
-    errors.push("La contraseña es obligatoria");
+    errors.push("Password is required");
   }
 
   if (password && password.length < 8) {
-    errors.push("La contraseña debe tener al menos 8 caracteres");
+    errors.push("Password must be at least 8 characters long");
   }
 
   return {

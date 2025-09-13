@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Eye, EyeOff, Wifi, Lock, Settings } from "lucide-react";
+import { useTranslation } from "../hooks/useTranslation";
 
 const WiFiForm = ({ onSubmit, isLoading }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     ssid: "",
     password: "",
@@ -12,9 +14,9 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
   const [errors, setErrors] = useState({});
 
   const securityOptions = [
-    { value: "WPA", label: "WPA/WPA2" },
-    { value: "WEP", label: "WEP" },
-    { value: "nopass", label: "Sin contraseña" },
+    { value: "WPA", label: t("form.securityOptions.WPA") },
+    { value: "WEP", label: t("form.securityOptions.WEP") },
+    { value: "nopass", label: t("form.securityOptions.nopass") },
   ];
 
   const handleChange = (e) => {
@@ -24,7 +26,6 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // Limpiar errores cuando el usuario modifica el campo
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -34,16 +35,16 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
     const newErrors = {};
 
     if (!formData.ssid.trim()) {
-      newErrors.ssid = "El nombre de la red es obligatorio";
+      newErrors.ssid = t("validation.ssidRequired");
     } else if (formData.ssid.length > 32) {
-      newErrors.ssid = "El nombre no puede exceder 32 caracteres";
+      newErrors.ssid = t("validation.ssidTooLong");
     }
 
     if (formData.security !== "nopass") {
       if (!formData.password.trim()) {
-        newErrors.password = "La contraseña es obligatoria";
+        newErrors.password = t("validation.passwordRequired");
       } else if (formData.password.length < 8) {
-        newErrors.password = "La contraseña debe tener al menos 8 caracteres";
+        newErrors.password = t("validation.passwordTooShort");
       }
     }
 
@@ -72,11 +73,9 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
           </div>
           <div>
             <h2 className="text-xl font-semibold text-gray-900">
-              Generador de QR WiFi
+              {t("title")}
             </h2>
-            <p className="text-sm text-gray-600">
-              Introduce los datos de tu red WiFi
-            </p>
+            <p className="text-sm text-gray-600">{t("subtitle")}</p>
           </div>
         </div>
 
@@ -87,7 +86,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
               htmlFor="ssid"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
-              Nombre de la red (SSID)
+              {t("form.ssidLabel")}
             </label>
             <input
               type="text"
@@ -95,7 +94,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
               name="ssid"
               value={formData.ssid}
               onChange={handleChange}
-              placeholder="Mi_WiFi"
+              placeholder={t("form.ssidPlaceholder")}
               className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                 errors.ssid ? "border-red-300" : "border-gray-300"
               }`}
@@ -106,14 +105,13 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
             )}
           </div>
 
-          {/* Security Type */}
           <div>
             <label
               htmlFor="security"
               className="block text-sm font-medium text-gray-700 mb-1"
             >
               <Settings className="w-4 h-4 inline mr-1" />
-              Tipo de seguridad
+              {t("form.securityLabel")}
             </label>
             <select
               id="security"
@@ -131,7 +129,6 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
             </select>
           </div>
 
-          {/* Password Field - Solo mostrar si no es 'nopass' */}
           {formData.security !== "nopass" && (
             <div>
               <label
@@ -139,7 +136,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
                 <Lock className="w-4 h-4 inline mr-1" />
-                Contraseña
+                {t("form.passwordLabel")}
               </label>
               <div className="relative">
                 <input
@@ -148,7 +145,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Tu contraseña WiFi"
+                  placeholder={t("form.passwordPlaceholder")}
                   className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
                     errors.password ? "border-red-300" : "border-gray-300"
                   }`}
@@ -173,7 +170,6 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
             </div>
           )}
 
-          {/* Hidden Network Checkbox */}
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -188,11 +184,10 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
               htmlFor="hidden"
               className="ml-2 block text-sm text-gray-700"
             >
-              Red oculta (SSID no visible)
+              {t("form.hiddenLabel")}
             </label>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={isLoading}
@@ -201,20 +196,16 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
             {isLoading ? (
               <div className="flex items-center">
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                Generando QR...
+                {t("form.generating")}
               </div>
             ) : (
-              "Generar Código QR"
+              t("form.generateButton")
             )}
           </button>
         </form>
 
         <div className="mt-4 p-3 bg-blue-50 rounded-md">
-          <p className="text-xs text-blue-700">
-            <strong>Nota:</strong> Tus datos no se guardan ni se envían a ningún
-            servidor. Todo el procesamiento se realiza localmente en tu
-            navegador.
-          </p>
+          <p className="text-xs text-blue-700">{t("form.privacyNote")}</p>
         </div>
       </div>
     </div>

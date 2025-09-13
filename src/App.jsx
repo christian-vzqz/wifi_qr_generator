@@ -1,7 +1,12 @@
 import QRGenerator from "./components/QRGenerator";
+import { LanguageProvider } from "./contexts/LanguageContext";
 
 function App() {
-  return <QRGenerator />;
+  return (
+    <LanguageProvider>
+      <QRGenerator />
+    </LanguageProvider>
+  );
 }
 
 export default App;

@@ -11,6 +11,7 @@ A modern and simple web application for generating QR codes that allow automatic
 - 📥 **Easy download**: Save QR code as PNG image
 - 📋 **Copy to clipboard**: Copy image directly
 - 🔧 **Flexible**: Supports different WiFi security types
+- 🌍 **Multilingual**: Available in English and Spanish with automatic language detection
 
 ## 🚀 Technologies used
 
@@ -74,6 +75,10 @@ A modern and simple web application for generating QR codes that allow automatic
    - Scan with any mobile device
    - WiFi connection will be made automatically
 
+5. **Language selection**:
+   - The app automatically detects your system language
+   - You can manually switch between English and Spanish using the language selector in the top-right corner
+
 ## 🔧 Customization
 
 ### Colors and theme
@@ -110,14 +115,21 @@ const qrCodeDataURL = await QRCode.toDataURL(wifiString, {
 wifi_qr_generator/
 ├── src/
 │   ├── components/
-│   │   ├── QRGenerator.jsx    # Main component
-│   │   ├── WiFiForm.jsx       # Form for WiFi data
-│   │   └── QRDisplay.jsx      # Display and download QR
+│   │   ├── QRGenerator.jsx       # Main component
+│   │   ├── WiFiForm.jsx          # Form for WiFi data
+│   │   ├── QRDisplay.jsx         # Display and download QR
+│   │   └── LanguageSelector.jsx  # Language switcher
+│   ├── contexts/
+│   │   └── LanguageContext.jsx   # i18n context provider
+│   ├── hooks/
+│   │   └── useTranslation.js     # Translation hook
+│   ├── locales/
+│   │   └── translations.js       # Translation dictionaries
 │   ├── utils/
-│   │   └── qrUtils.js         # QR generation utilities
-│   ├── App.jsx                # Root component
-│   ├── main.jsx               # Entry point
-│   └── index.css              # Base styles (Tailwind)
+│   │   └── qrUtils.js            # QR generation utilities
+│   ├── App.jsx                   # Root component
+│   ├── main.jsx                  # Entry point
+│   └── index.css                 # Base styles (Tailwind)
 ├── index.html                 # Base HTML
 ├── package.json               # Dependencies and scripts
 ├── tailwind.config.js         # Tailwind configuration
@@ -130,6 +142,24 @@ wifi_qr_generator/
 - ✅ **No data collection**: No data is saved or sent
 - ✅ **No analytics**: No user tracking
 - ✅ **Open source**: You can review all the code
+
+## 🌍 Internationalization
+
+The application supports multiple languages with automatic detection:
+
+- **Automatic detection**: Detects your browser/system language on first visit
+- **Manual selection**: Use the language selector in the top-right corner
+- **Supported languages**: English (en) and Spanish (es)
+- **Fallback**: Defaults to English if your system language is not supported
+- **Persistence**: Your language preference is saved in localStorage
+
+### Adding new languages
+
+To add a new language:
+
+1. Add translations to `src/locales/translations.js`
+2. Update the language detection logic in `src/contexts/LanguageContext.jsx`
+3. Add the new language option to `src/components/LanguageSelector.jsx`
 
 ## 🌍 Deployment
 
