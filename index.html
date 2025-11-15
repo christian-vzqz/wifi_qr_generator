@@ -4,11 +4,120 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/webp" href="/favicon.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Generador de QR WiFi</title>
+    <title>
+      Generador de QR WiFi Gratis - Comparte tu Red Fácilmente | WiFi QR Connect
+    </title>
     <meta
       name="description"
-      content="Genera códigos QR para compartir tu WiFi de forma fácil y segura. Solo escanea y conecta automáticamente."
+      content="Genera códigos QR para compartir tu WiFi en segundos. Gratis, seguro y sin registro. Compatible con iPhone y Android. Procesamiento 100% local."
     />
+    <meta
+      name="keywords"
+      content="generador QR WiFi, código QR WiFi gratis, compartir WiFi QR, WiFi QR generator, crear QR WiFi, generador códigos QR"
+    />
+    <meta name="author" content="WiFi QR Connect" />
+    <link rel="canonical" href="https://wifiqrconnect.netlify.app/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wifiqrconnect.netlify.app/" />
+    <meta
+      property="og:title"
+      content="Generador de QR WiFi Gratis - Comparte tu Red Fácilmente"
+    />
+    <meta
+      property="og:description"
+      content="Genera códigos QR para compartir tu WiFi en segundos. Gratis, seguro y sin registro. Compatible con iPhone y Android."
+    />
+    <meta
+      property="og:image"
+      content="https://wifiqrconnect.netlify.app/og-image-en.png"
+    />
+    <meta property="og:locale" content="es_MX" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://wifiqrconnect.netlify.app/" />
+    <meta name="twitter:title" content="Generador de QR WiFi Gratis" />
+    <meta
+      name="twitter:description"
+      content="Genera códigos QR para compartir tu WiFi en segundos. Gratis, seguro y sin registro."
+    />
+    <meta
+      name="twitter:image"
+      content="https://wifiqrconnect.netlify.app/og-image-en.png"
+    />
+
+    <meta name="theme-color" content="#3B82F6" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7067552437812933"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-J76L07P1R8"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-J76L07P1R8", {
+        anonymize_ip: true,
+        cookie_flags: "SameSite=None;Secure",
+      });
+
+      // Eventos personalizados
+      window.trackQRGenerated = function () {
+        gtag("event", "qr_generated", {
+          event_category: "engagement",
+          event_label: "WiFi QR Created",
+        });
+      };
+
+      window.trackQRDownloaded = function () {
+        gtag("event", "qr_downloaded", {
+          event_category: "conversion",
+          event_label: "QR Download",
+        });
+      };
+
+      window.trackLanguageChange = function (language) {
+        gtag("event", "language_change", {
+          event_category: "engagement",
+          event_label: language,
+        });
+      };
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "WiFi QR Connect",
+        "description": "Generador gratuito de códigos QR para compartir credenciales WiFi",
+        "url": "https://wifiqrconnect.netlify.app/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Generación de códigos QR WiFi",
+          "Procesamiento local seguro",
+          "Sin registro requerido",
+          "Soporte multiidioma",
+          "Compatible con iOS y Android"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
