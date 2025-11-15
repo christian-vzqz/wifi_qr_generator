@@ -22,8 +22,8 @@ importers:
         version: 19.1.1(react@19.2.0)
     devDependencies:
       '@eslint/js':
-        specifier: ^9.33.0
-        version: 9.35.0
+        specifier: ^9.39.1
+        version: 9.39.1
       '@tailwindcss/forms':
         specifier: ^0.5.10
         version: 0.5.10(tailwindcss@4.1.13)
