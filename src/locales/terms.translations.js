@@ -86,7 +86,8 @@ export const termsTranslations = {
         },
         section9: {
           title: "9. Disponibilidad del Servicio",
-          intro: "Aunque nos esforzamos por mantener el servicio disponible 24/7, no garantizamos:",
+          intro:
+            "Aunque nos esforzamos por mantener el servicio disponible 24/7, no garantizamos:",
           list: [
             "Disponibilidad ininterrumpida del servicio",
             "Ausencia de errores o bugs",
@@ -180,7 +181,8 @@ export const termsTranslations = {
           title: "5. Limitation of Liability",
           highlight:
             'THE SERVICE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND.',
-          intro: "WiFi QR Connect and its operators will NOT be responsible for:",
+          intro:
+            "WiFi QR Connect and its operators will NOT be responsible for:",
           list: [
             "Errors in the generated QR codes",
             "Unauthorized use of your WiFi network by third parties",
