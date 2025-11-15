@@ -66,16 +66,16 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-blue-100 rounded-lg">
-            <Wifi className="w-6 h-6 text-blue-600" />
+          <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+            <Wifi className="w-6 h-6 text-blue-600 dark:text-blue-400" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               {t("title")}
             </h2>
-            <p className="text-sm text-gray-600">{t("subtitle")}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">{t("subtitle")}</p>
           </div>
         </div>
 
@@ -84,7 +84,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
           <div>
             <label
               htmlFor="ssid"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               {t("form.ssidLabel")}
             </label>
@@ -95,20 +95,20 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
               value={formData.ssid}
               onChange={handleChange}
               placeholder={t("form.ssidPlaceholder")}
-              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                errors.ssid ? "border-red-300" : "border-gray-300"
+              className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                errors.ssid ? "border-red-300 dark:border-red-500" : "border-gray-300 dark:border-gray-600"
               }`}
               disabled={isLoading}
             />
             {errors.ssid && (
-              <p className="mt-1 text-sm text-red-600">{errors.ssid}</p>
+              <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.ssid}</p>
             )}
           </div>
 
           <div>
             <label
               htmlFor="security"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               <Settings className="w-4 h-4 inline mr-1" />
               {t("form.securityLabel")}
@@ -118,7 +118,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
               name="security"
               value={formData.security}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               disabled={isLoading}
             >
               {securityOptions.map((option) => (
@@ -133,7 +133,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
               >
                 <Lock className="w-4 h-4 inline mr-1" />
                 {t("form.passwordLabel")}
@@ -146,8 +146,8 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder={t("form.passwordPlaceholder")}
-                  className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
-                    errors.password ? "border-red-300" : "border-gray-300"
+                  className={`w-full px-3 py-2 pr-10 border rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                    errors.password ? "border-red-300 dark:border-red-500" : "border-gray-300 dark:border-gray-600"
                   }`}
                   disabled={isLoading}
                 />
@@ -158,14 +158,14 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
                   disabled={isLoading}
                 >
                   {showPassword ? (
-                    <EyeOff className="w-4 h-4 text-gray-400" />
+                    <EyeOff className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                   ) : (
-                    <Eye className="w-4 h-4 text-gray-400" />
+                    <Eye className="w-4 h-4 text-gray-400 dark:text-gray-500" />
                   )}
                 </button>
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password}</p>
               )}
             </div>
           )}
@@ -177,12 +177,12 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
               name="hidden"
               checked={formData.hidden}
               onChange={handleChange}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded dark:bg-gray-700"
               disabled={isLoading}
             />
             <label
               htmlFor="hidden"
-              className="ml-2 block text-sm text-gray-700"
+              className="ml-2 block text-sm text-gray-700 dark:text-gray-300"
             >
               {t("form.hiddenLabel")}
             </label>
@@ -191,7 +191,7 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isLoading ? (
               <div className="flex items-center">
@@ -204,8 +204,8 @@ const WiFiForm = ({ onSubmit, isLoading }) => {
           </button>
         </form>
 
-        <div className="mt-4 p-3 bg-blue-50 rounded-md">
-          <p className="text-xs text-blue-700">{t("form.privacyNote")}</p>
+        <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-md">
+          <p className="text-xs text-blue-700 dark:text-blue-300">{t("form.privacyNote")}</p>
         </div>
       </div>
     </div>
