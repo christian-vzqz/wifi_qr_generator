@@ -51,7 +51,9 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               {t("qrDisplay.title")}
             </h2>
-            <p className="text-sm text-gray-600 dark:text-gray-400">{t("qrDisplay.subtitle")}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {t("qrDisplay.subtitle")}
+            </p>
           </div>
         </div>
 
@@ -74,18 +76,26 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
           </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">{t("qrDisplay.network")}</span>
-              <span className="font-medium text-gray-900 dark:text-gray-100">{wifiData.ssid}</span>
+              <span className="text-gray-600 dark:text-gray-400">
+                {t("qrDisplay.network")}
+              </span>
+              <span className="font-medium text-gray-900 dark:text-gray-100">
+                {wifiData.ssid}
+              </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600 dark:text-gray-400">{t("qrDisplay.security")}</span>
+              <span className="text-gray-600 dark:text-gray-400">
+                {t("qrDisplay.security")}
+              </span>
               <span className="font-medium text-gray-900 dark:text-gray-100">
                 {formatSecurityType(wifiData.security)}
               </span>
             </div>
             {wifiData.security !== "nopass" && (
               <div className="flex justify-between">
-                <span className="text-gray-600 dark:text-gray-400">Contraseña:</span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  Contraseña:
+                </span>
                 <span className="font-mono text-sm bg-gray-200 dark:bg-gray-600 text-gray-900 dark:text-gray-100 px-2 py-1 rounded">
                   {"•".repeat(wifiData.password.length)}
                 </span>
@@ -93,8 +103,12 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
             )}
             {wifiData.hidden && (
               <div className="flex justify-between">
-                <span className="text-gray-600 dark:text-gray-400">Red oculta:</span>
-                <span className="font-medium text-gray-900 dark:text-gray-100">Sí</span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  Red oculta:
+                </span>
+                <span className="font-medium text-gray-900 dark:text-gray-100">
+                  Sí
+                </span>
               </div>
             )}
           </div>

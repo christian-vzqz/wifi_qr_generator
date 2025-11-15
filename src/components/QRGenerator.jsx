@@ -68,7 +68,9 @@ const QRGenerator = () => {
                 <h3 className="text-sm font-medium text-red-800 dark:text-red-300">
                   {t("errors.title")}
                 </h3>
-                <p className="mt-1 text-sm text-red-700 dark:text-red-400">{error}</p>
+                <p className="mt-1 text-sm text-red-700 dark:text-red-400">
+                  {error}
+                </p>
               </div>
               <div className="ml-auto pl-3">
                 <button
