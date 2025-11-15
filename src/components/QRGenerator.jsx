@@ -2,6 +2,7 @@ import { useState } from "react";
 import WiFiForm from "./WiFiForm";
 import QRDisplay from "./QRDisplay";
 import LanguageSelector from "./LanguageSelector";
+import ThemeToggle from "./ThemeToggle";
 import { generateQRCode } from "../utils/qrUtils";
 import { useTranslation } from "../hooks/useTranslation";
 
@@ -41,15 +42,18 @@ const QRGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
-      <LanguageSelector />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-8 px-4 transition-colors">
+      <div className="fixed top-4 right-4 z-50 flex gap-3">
+        <ThemeToggle />
+        <LanguageSelector />
+      </div>
       <div className="max-w-md mx-auto">
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
             <div className="flex">
               <div className="flex-shrink-0">
                 <svg
-                  className="h-5 w-5 text-red-400"
+                  className="h-5 w-5 text-red-400 dark:text-red-500"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
@@ -61,15 +65,17 @@ const QRGenerator = () => {
                 </svg>
               </div>
               <div className="ml-3">
-                <h3 className="text-sm font-medium text-red-800">
+                <h3 className="text-sm font-medium text-red-800 dark:text-red-300">
                   {t("errors.title")}
                 </h3>
-                <p className="mt-1 text-sm text-red-700">{error}</p>
+                <p className="mt-1 text-sm text-red-700 dark:text-red-400">
+                  {error}
+                </p>
               </div>
               <div className="ml-auto pl-3">
                 <button
                   onClick={() => setError(null)}
-                  className="inline-flex text-red-400 hover:text-red-600"
+                  className="inline-flex text-red-400 dark:text-red-500 hover:text-red-600 dark:hover:text-red-400"
                 >
                   <span className="sr-only">{t("errors.close")}</span>
                   <svg

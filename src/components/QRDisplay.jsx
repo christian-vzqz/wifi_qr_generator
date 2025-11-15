@@ -42,22 +42,24 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-white rounded-lg shadow-lg p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 transition-colors">
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 bg-green-100 rounded-lg">
-            <QrCode className="w-6 h-6 text-green-600" />
+          <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+            <QrCode className="w-6 h-6 text-green-600 dark:text-green-400" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
               {t("qrDisplay.title")}
             </h2>
-            <p className="text-sm text-gray-600">{t("qrDisplay.subtitle")}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              {t("qrDisplay.subtitle")}
+            </p>
           </div>
         </div>
 
         {/* QR Code Display */}
         <div className="text-center mb-6">
-          <div className="inline-block p-4 bg-white border-2 border-gray-200 rounded-lg shadow-sm">
+          <div className="inline-block p-4 bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-700 rounded-lg shadow-sm">
             <img
               src={qrData}
               alt="WiFi QR Code"
@@ -67,34 +69,46 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
         </div>
 
         {/* WiFi Info Summary */}
-        <div className="bg-gray-50 rounded-lg p-4 mb-6">
-          <h3 className="flex items-center text-sm font-medium text-gray-700 mb-3">
+        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4 mb-6">
+          <h3 className="flex items-center text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
             <Wifi className="w-4 h-4 mr-2" />
             {t("qrDisplay.networkInfo")}
           </h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
-              <span className="text-gray-600">{t("qrDisplay.network")}</span>
-              <span className="font-medium text-gray-900">{wifiData.ssid}</span>
+              <span className="text-gray-600 dark:text-gray-400">
+                {t("qrDisplay.network")}
+              </span>
+              <span className="font-medium text-gray-900 dark:text-gray-100">
+                {wifiData.ssid}
+              </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">{t("qrDisplay.security")}</span>
-              <span className="font-medium text-gray-900">
+              <span className="text-gray-600 dark:text-gray-400">
+                {t("qrDisplay.security")}
+              </span>
+              <span className="font-medium text-gray-900 dark:text-gray-100">
                 {formatSecurityType(wifiData.security)}
               </span>
             </div>
             {wifiData.security !== "nopass" && (
               <div className="flex justify-between">
-                <span className="text-gray-600">Contraseña:</span>
-                <span className="font-mono text-sm bg-gray-200 px-2 py-1 rounded">
+                <span className="text-gray-600 dark:text-gray-400">
+                  Contraseña:
+                </span>
+                <span className="font-mono text-sm bg-gray-200 dark:bg-gray-600 text-gray-900 dark:text-gray-100 px-2 py-1 rounded">
                   {"•".repeat(wifiData.password.length)}
                 </span>
               </div>
             )}
             {wifiData.hidden && (
               <div className="flex justify-between">
-                <span className="text-gray-600">Red oculta:</span>
-                <span className="font-medium text-gray-900">Sí</span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  Red oculta:
+                </span>
+                <span className="font-medium text-gray-900 dark:text-gray-100">
+                  Sí
+                </span>
               </div>
             )}
           </div>
@@ -105,7 +119,7 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
           <div>
             <label
               htmlFor="filename"
-              className="block text-sm font-medium text-gray-700 mb-2"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
             >
               {t("qrDisplay.filenameLabel")}
             </label>
@@ -115,9 +129,9 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
               value={filename}
               onChange={(e) => setFilename(e.target.value)}
               placeholder={t("qrDisplay.filenamePlaceholder")}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
               {t("qrDisplay.filenameSuffix")}{" "}
               {(filename || "wifi-qr").replace(/\.png$/, "")}.png
             </p>
@@ -128,7 +142,7 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
             <button
               onClick={handleDownload}
               disabled={isDownloading}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 dark:bg-blue-500 text-white rounded-md hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isDownloading ? (
                 <>
@@ -145,7 +159,7 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
 
             <button
               onClick={copyToClipboard}
-              className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-gray-600 dark:bg-gray-700 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors"
             >
               {copied ? (
                 <>
@@ -163,18 +177,18 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
 
           <button
             onClick={onReset}
-            className="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+            className="w-full px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors"
           >
             {t("qrDisplay.generateAnotherButton")}
           </button>
         </div>
 
         {/* Instructions */}
-        <div className="mt-6 p-3 bg-blue-50 rounded-md">
-          <h4 className="text-sm font-medium text-blue-800 mb-1">
+        <div className="mt-6 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-md">
+          <h4 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-1">
             {t("qrDisplay.instructions.title")}
           </h4>
-          <ul className="text-xs text-blue-700 space-y-1">
+          <ul className="text-xs text-blue-700 dark:text-blue-400 space-y-1">
             <li>{t("qrDisplay.instructions.step1")}</li>
             <li>{t("qrDisplay.instructions.step2")}</li>
             <li>{t("qrDisplay.instructions.step3")}</li>
