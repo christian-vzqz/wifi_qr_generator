@@ -3,8 +3,18 @@ import WiFiForm from "./WiFiForm";
 import QRDisplay from "./QRDisplay";
 import LanguageSelector from "./LanguageSelector";
 import ThemeToggle from "./ThemeToggle";
+import AdSense from "./AdSense";
 import { generateQRCode } from "../utils/qrUtils";
 import { useTranslation } from "../hooks/useTranslation";
+
+const trackEvent = (callbackName) => {
+  if (
+    typeof window !== "undefined" &&
+    typeof window[callbackName] === "function"
+  ) {
+    window[callbackName]();
+  }
+};
 
 const QRGenerator = () => {
   const { t } = useTranslation();
@@ -27,6 +37,7 @@ const QRGenerator = () => {
 
       setQrData(qrDataURL);
       setWifiData(formData);
+      trackEvent("trackQRGenerated");
     } catch (err) {
       console.error("Error generando QR:", err);
       setError(t("errors.qrGeneration"));
@@ -42,68 +53,92 @@ const QRGenerator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-8 px-4 transition-colors">
+    <div className="w-full py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="fixed top-4 right-4 z-50 flex gap-3">
         <ThemeToggle />
         <LanguageSelector />
       </div>
-      <div className="max-w-md mx-auto">
-        {error && (
-          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <svg
-                  className="h-5 w-5 text-red-400 dark:text-red-500"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className="ml-3">
-                <h3 className="text-sm font-medium text-red-800 dark:text-red-300">
-                  {t("errors.title")}
-                </h3>
-                <p className="mt-1 text-sm text-red-700 dark:text-red-400">
-                  {error}
-                </p>
-              </div>
-              <div className="ml-auto pl-3">
-                <button
-                  onClick={() => setError(null)}
-                  className="inline-flex text-red-400 dark:text-red-500 hover:text-red-600 dark:hover:text-red-400"
-                >
-                  <span className="sr-only">{t("errors.close")}</span>
+
+      <div className="max-w-lg mx-auto w-full flex flex-col gap-6">
+        <AdSense
+          adSlot="1234567890"
+          style={{
+            minHeight: "90px",
+            marginTop: "80px",
+            marginBottom: "0px",
+            width: "100%",
+            maxWidth: "100%",
+          }}
+        />
+
+        <div className="w-full">
+          {error && (
+            <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+              <div className="flex">
+                <div className="flex-shrink-0">
                   <svg
-                    className="h-5 w-5"
+                    className="h-5 w-5 text-red-400 dark:text-red-500"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
                     <path
                       fillRule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>
+                </div>
+                <div className="ml-3">
+                  <h3 className="text-sm font-medium text-red-800 dark:text-red-300">
+                    {t("errors.title")}
+                  </h3>
+                  <p className="mt-1 text-sm text-red-700 dark:text-red-400">
+                    {error}
+                  </p>
+                </div>
+                <div className="ml-auto pl-3">
+                  <button
+                    onClick={() => setError(null)}
+                    className="inline-flex text-red-400 dark:text-red-500 hover:text-red-600 dark:hover:text-red-400"
+                  >
+                    <span className="sr-only">{t("errors.close")}</span>
+                    <svg
+                      className="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {!qrData ? (
-          <WiFiForm onSubmit={handleGenerateQR} isLoading={isLoading} />
-        ) : (
-          <QRDisplay
-            qrData={qrData}
-            wifiData={wifiData}
-            onReset={handleReset}
-          />
-        )}
+          {!qrData ? (
+            <WiFiForm onSubmit={handleGenerateQR} isLoading={isLoading} />
+          ) : (
+            <QRDisplay
+              qrData={qrData}
+              wifiData={wifiData}
+              onReset={handleReset}
+            />
+          )}
+        </div>
+
+        <AdSense
+          adSlot="9876543210"
+          style={{
+            minHeight: "90px",
+            marginTop: "0px",
+            width: "100%",
+            maxWidth: "100%",
+          }}
+        />
       </div>
     </div>
   );

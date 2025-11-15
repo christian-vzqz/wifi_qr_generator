@@ -3,6 +3,15 @@ import { Download, QrCode, Wifi, Check, Copy } from "lucide-react";
 import { downloadQRCode } from "../utils/qrUtils";
 import { useTranslation } from "../hooks/useTranslation";
 
+const trackDownloadEvent = () => {
+  if (
+    typeof window !== "undefined" &&
+    typeof window.trackQRDownloaded === "function"
+  ) {
+    window.trackQRDownloaded();
+  }
+};
+
 const QRDisplay = ({ qrData, wifiData, onReset }) => {
   const { t, formatSecurityType } = useTranslation();
   const [filename, setFilename] = useState("wifi-qr");
@@ -13,6 +22,7 @@ const QRDisplay = ({ qrData, wifiData, onReset }) => {
     try {
       setIsDownloading(true);
       await downloadQRCode(qrData, filename || "wifi-qr");
+      trackDownloadEvent();
     } catch (error) {
       console.error("Error al descargar:", error);
       alert(t("errors.download"));
