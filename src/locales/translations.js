@@ -1,4 +1,8 @@
-export const translations = {
+import { footerTranslations } from "./footer.translations";
+import { privacyTranslations } from "./privacy.translations";
+import { termsTranslations } from "./terms.translations";
+
+const baseTranslations = {
   es: {
     title: "Generador de QR WiFi",
     subtitle: "Introduce los datos de tu red WiFi",
@@ -140,3 +144,38 @@ export const translations = {
     },
   },
 };
+
+const isPlainObject = (value) =>
+  Boolean(value) && typeof value === "object" && !Array.isArray(value);
+
+const mergeDeep = (target = {}, source = {}) => {
+  const result = { ...target };
+
+  for (const [key, value] of Object.entries(source)) {
+    if (Array.isArray(value)) {
+      result[key] = [...value];
+    } else if (isPlainObject(value)) {
+      result[key] = mergeDeep(result[key] || {}, value);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  return result;
+};
+
+const mergeTranslations = (...translationGroups) => {
+  return translationGroups.reduce((acc, group) => {
+    for (const [language, entries] of Object.entries(group)) {
+      acc[language] = mergeDeep(acc[language], entries);
+    }
+    return acc;
+  }, {});
+};
+
+export const translations = mergeTranslations(
+  baseTranslations,
+  footerTranslations,
+  privacyTranslations,
+  termsTranslations
+);
